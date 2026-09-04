@@ -1,0 +1,19 @@
+{
+  "name": "pawskill-ai-developer-evaluator",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "pawskill": "bin/pawskill.js"
+  },
+  "scripts": {
+    "evaluate": "node scripts/evaluate.js",
+    "evaluate:claude": "node scripts/evaluate-with-claude.js",
+    "evaluate:codex": "node scripts/evaluate-with-codex.js",
+    "import:claude-history": "node scripts/import-claude-history.js",
+    "import:git-history": "node scripts/import-git-history.js",
+    "sample-prompts": "node scripts/sample-prompts.js",
+    "evaluate:prompting": "node scripts/evaluate-prompting.js",
+    "test": "node --test"
+  }
+}

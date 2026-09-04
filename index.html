@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Evidence-first AI engineering skill evaluation dashboard." />
+    <title>PawSkill — AI Engineering Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#overview" aria-label="PawSkill home">
+          <span class="brand-mark"><i></i><i></i><i></i></span>
+          <span>pawskill<span class="brand-dot">.</span></span>
+        </a>
+
+        <nav aria-label="Main navigation">
+          <a class="nav-link active" href="#overview"><span>▣</span> Overview</a>
+          <a class="nav-link" href="#evidence"><span>◌</span> Evidence</a>
+          <a class="nav-link" href="#skills"><span>◇</span> Skill profile</a>
+          <a class="nav-link" href="#coaching"><span>✎</span> Coaching</a>
+          <a class="nav-link" href="#integrations"><span>⌘</span> Integrations</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="privacy-note"><span>●</span> Private by design<br /><small>Only derived signals are shared</small></div>
+          <button class="account" type="button"><span class="avatar small" id="accountInitials">–</span><span id="accountName">No profile yet<small>Run npm run evaluate</small></span><b>⌄</b></button>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div class="breadcrumb" id="breadcrumbWorkspace">No profile yet <span>/</span> Engineering profile</div>
+          <div class="top-actions">
+            <button class="period" type="button" id="periodButton"><span id="periodLabel">No profile yet</span> <span>⌄</span></button>
+            <button class="icon-button" type="button" aria-label="Notifications" id="notificationsButton">◔<i></i></button>
+          </div>
+        </header>
+
+        <section class="profile-intro" id="overview">
+          <div class="profile-title">
+            <span class="avatar" id="profileInitials">–</span>
+            <div><p class="eyebrow">AI engineering profile</p><h1 id="profileName">No profile yet</h1><p class="subtle">A view of how you turn AI assistance into engineering outcomes.</p></div>
+          </div>
+          <button class="report-button" type="button" id="reportButton">↗ &nbsp; Download report</button>
+        </section>
+
+        <section class="hero-grid" aria-label="Evaluation summary">
+          <article class="score-card">
+            <div class="card-label">Overall signal <button class="info" type="button" title="Weighted, evidence-based competency score">i</button></div>
+            <div class="score-line"><strong>84</strong><span>/100</span><em>+6.2%</em></div>
+            <p id="scoreSummary">Strong, repeatable engineering habits backed by <b>36 verified outcomes.</b></p>
+            <div class="score-meter"><span style="width:84%"></span></div>
+            <div class="score-key"><span>Developing</span><span>Established</span><span>Exceptional</span></div>
+          </article>
+
+          <article class="insight-card">
+            <div class="card-label">This period</div>
+            <div class="insight-main"><div class="up-arrow" id="insightArrow">↗</div><div><strong id="insightHeadline">Not enough evidence yet</strong><p id="insightBody">Import your Claude history and/or GitHub PRs, then run npm run evaluate.</p></div></div>
+            <div class="recommendation"><span>✦</span><p><b>Next focus:</b> <span id="insightFocus">—</span></p></div>
+          </article>
+        </section>
+
+        <section class="archetype-section" id="archetypes">
+          <div class="section-heading compact"><div><p class="eyebrow">Engineering archetypes</p><h2>Your work-style constellation</h2><p class="subtle">A flexible reflection of how you approach engineering work—not a fixed personality label.</p></div><button class="text-button" type="button" id="archetypeInfo">How this works <span>→</span></button></div>
+          <div class="archetype-grid">
+            <article class="primary-archetype" id="primaryArchetype"></article>
+            <article class="compatibility-card"><p class="eyebrow">Works especially well with</p><div id="veryCompatible" class="compatibility-list"></div><p class="eyebrow compatible-label">Also compatible with</p><div id="okayCompatible" class="compatibility-list"></div></article>
+          </div>
+          <div class="archetype-full" id="archetypeFull" hidden>
+            <p class="eyebrow">All twelve archetypes</p>
+            <div class="archetype-full-grid" id="archetypeFullGrid"></div>
+          </div>
+        </section>
+
+        <section class="section-heading" id="skills"><div><p class="eyebrow">Competencies</p><h2>Where your signal comes from</h2></div><button class="text-button" type="button" id="scoringInfo">How scoring works <span>→</span></button></section>
+        <section class="competencies" id="competencyGrid"></section>
+
+        <section class="lower-grid">
+          <article class="evidence-panel" id="evidence">
+            <div class="panel-head"><div><p class="eyebrow">Evidence timeline</p><h2>Verified engineering moments</h2></div><button class="text-button" type="button" id="viewAllEvidence">View all <span>→</span></button></div>
+            <div class="timeline" id="timeline"></div>
+          </article>
+
+          <article class="ai-panel">
+            <div><p class="eyebrow">AI collaboration</p><h2>Thoughtful, not passive</h2><p class="subtle">How you treat AI suggestions across your work.</p></div>
+            <div id="aiCollaboration"></div>
+          </article>
+
+          <article class="history-panel" id="claudeHistory" aria-live="polite">
+            <div class="panel-head"><div><p class="eyebrow">Claude Code activity · local</p><h2>Observed workflow patterns</h2></div><span class="history-status" id="historyStatus">Loading</span></div>
+            <p class="subtle" id="historyDescription">Looking for a private, derived Claude Code history summary.</p>
+            <div class="history-metrics" id="historyMetrics"></div>
+            <div class="history-indicators" id="historyIndicators"></div>
+            <p class="history-caveat" id="historyCaveat"></p>
+          </article>
+
+          <article class="history-panel" id="measurementCheck" aria-live="polite">
+            <div class="panel-head"><div><p class="eyebrow">Measurement check</p><h2>Do independent signals agree?</h2></div></div>
+            <div class="history-indicators" id="measurementCheckBody"></div>
+            <p class="history-caveat" id="measurementCheckCaveat"></p>
+          </article>
+        </section>
+
+        <section class="coaching-section" id="coaching">
+          <div class="section-heading"><div><p class="eyebrow">Coaching</p><h2>External AI feedback</h2><p class="subtle">Each report below is generated by an explicit, separately-consented command — never run automatically.</p></div></div>
+          <div class="coaching-grid">
+            <article class="coaching-panel" id="claudeCoachingPanel" aria-live="polite">
+              <div class="panel-head"><div><p class="eyebrow">Claude CLI</p><h2>Engineering coaching</h2></div><span class="history-status" id="claudeCoachingStatus">Not generated</span></div>
+              <div id="claudeCoachingBody"></div>
+            </article>
+            <article class="coaching-panel" id="codexCoachingPanel" aria-live="polite">
+              <div class="panel-head"><div><p class="eyebrow">Codex CLI</p><h2>Engineering coaching</h2></div><span class="history-status" id="codexCoachingStatus">Not generated</span></div>
+              <div id="codexCoachingBody"></div>
+            </article>
+            <article class="coaching-panel" id="promptingCoachingPanel" aria-live="polite">
+              <div class="panel-head"><div><p class="eyebrow">Claude CLI · raw prompts</p><h2>Prompting-technique feedback</h2></div><span class="history-status" id="promptingCoachingStatus">Not generated</span></div>
+              <div id="promptingCoachingBody"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="source-strip" id="integrations"><div><span class="status-dot"></span><b id="sourcesCount">0 sources connected</b><p>Signals are collected locally and linked to outcomes.</p></div><div class="sources" id="sourcesList"></div><button class="text-button" type="button" id="manageSourcesButton">Manage sources <span>→</span></button></section>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
