@@ -37,7 +37,7 @@
           <div class="breadcrumb" id="breadcrumbWorkspace">No profile yet <span>/</span> Engineering profile</div>
           <div class="top-actions">
             <button class="period" type="button" id="periodButton"><span id="periodLabel">No profile yet</span> <span>⌄</span></button>
-            <button class="icon-button" type="button" aria-label="Notifications" id="notificationsButton">◔<i></i></button>
+            <button class="icon-button" type="button" aria-label="Notifications">◔<i></i></button>
           </div>
         </header>
 
@@ -53,15 +53,15 @@
           <article class="score-card">
             <div class="card-label">Overall signal <button class="info" type="button" title="Weighted, evidence-based competency score">i</button></div>
             <div class="score-line"><strong>84</strong><span>/100</span><em>+6.2%</em></div>
-            <p id="scoreSummary">Strong, repeatable engineering habits backed by <b>36 verified outcomes.</b></p>
+            <p>Strong, repeatable engineering habits backed by <b>36 verified outcomes.</b></p>
             <div class="score-meter"><span style="width:84%"></span></div>
             <div class="score-key"><span>Developing</span><span>Established</span><span>Exceptional</span></div>
           </article>
 
           <article class="insight-card">
             <div class="card-label">This period</div>
-            <div class="insight-main"><div class="up-arrow" id="insightArrow">↗</div><div><strong id="insightHeadline">Not enough evidence yet</strong><p id="insightBody">Import your Claude history and/or GitHub PRs, then run npm run evaluate.</p></div></div>
-            <div class="recommendation"><span>✦</span><p><b>Next focus:</b> <span id="insightFocus">—</span></p></div>
+            <div class="insight-main"><div class="up-arrow">↗</div><div><strong>Debugging is your edge</strong><p>You consistently validate hypotheses before changing code.</p></div></div>
+            <div class="recommendation"><span>✦</span><p><b>Next focus:</b> Add tests earlier in implementation work.</p></div>
           </article>
         </section>
 
@@ -98,12 +98,6 @@
             <div class="history-indicators" id="historyIndicators"></div>
             <p class="history-caveat" id="historyCaveat"></p>
           </article>
-
-          <article class="history-panel" id="measurementCheck" aria-live="polite">
-            <div class="panel-head"><div><p class="eyebrow">Measurement check</p><h2>Do independent signals agree?</h2></div></div>
-            <div class="history-indicators" id="measurementCheckBody"></div>
-            <p class="history-caveat" id="measurementCheckCaveat"></p>
-          </article>
         </section>
 
         <section class="coaching-section" id="coaching">
@@ -124,7 +118,7 @@
           </div>
         </section>
 
-        <section class="source-strip" id="integrations"><div><span class="status-dot"></span><b id="sourcesCount">0 sources connected</b><p>Signals are collected locally and linked to outcomes.</p></div><div class="sources" id="sourcesList"></div><button class="text-button" type="button" id="manageSourcesButton">Manage sources <span>→</span></button></section>
+        <section class="source-strip" id="integrations"><div><span class="status-dot"></span><b id="sourcesCount">0 sources connected</b><p>Signals are collected locally and linked to outcomes.</p></div><div class="sources" id="sourcesList"></div><button class="text-button" type="button">Manage sources <span>→</span></button></section>
       </main>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>

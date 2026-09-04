@@ -1,0 +1,12 @@
+Deck sources (all local project materials):
+- README.md — product purpose, evaluation logic, privacy boundaries, intended-use constraints
+- data/profile.json — example competency profile and evidence timeline
+- data/profile.json — evidence-informed archetypes, grades, and practitioner tier
+- data/claude-history-summary.json — example Claude Code activity summary (65 sessions; workflow indicators; 987 code changes)
+- data/git-history-summary.json — example PR delivery-practice summary (100 merged PRs; approval, CI, and test-file rates)
+
+No external assets or external claims used.
+
+Animal illustration additions (generated with built-in OpenAI image generation):
+- Chameleon, fox, owl, octopus, raven, elephant editorial-mascot assets
+- Prompt record: friendly intelligent engineering companions, editorial illustration, ivory background, no text or logos

@@ -1,0 +1,22 @@
+{
+  "developer": { "name": "Jia Tan", "initials": "JT", "workspace": "Personal workspace" },
+  "period": "Last 30 days",
+  "prior_overall": 78,
+  "sources": ["GitHub", "Codex", "Claude"],
+  "ai_collaboration": { "reviewed_suggestions": 87, "used_directly": 8, "modified": 61, "rejected": 31 },
+  "events": [
+    { "id": "evt_101", "occurred_at": "2026-08-10T10:12:00Z", "title": "Fixed live-room latency regression", "summary": "Used profiler evidence to reject an early AI hypothesis; added a regression test before merging.", "competency": "debugging", "signal_score": 96, "verification": "verified", "outcome": "positive" },
+    { "id": "evt_102", "occurred_at": "2026-08-07T08:20:00Z", "title": "Reviewed authentication refactor", "summary": "Found an unhandled token-refresh path and proposed a safer implementation approach.", "competency": "architecture", "signal_score": 81, "verification": "corroborated", "outcome": "positive" },
+    { "id": "evt_103", "occurred_at": "2026-08-03T09:45:00Z", "title": "Added checkout validation coverage", "summary": "Expanded boundary-case tests after an AI-generated implementation left two scenarios unverified.", "competency": "testing", "signal_score": 67, "verification": "verified", "outcome": "positive" },
+    { "id": "evt_104", "occurred_at": "2026-08-01T11:10:00Z", "title": "Triaged API timeout incident", "summary": "Compared three hypotheses against traces before narrowing the root cause.", "competency": "problem_solving", "signal_score": 91, "verification": "verified", "outcome": "positive" },
+    { "id": "evt_105", "occurred_at": "2026-07-30T06:10:00Z", "title": "Validated cache invalidation fix", "summary": "Ran targeted experiments and checked the change against production metrics.", "competency": "debugging", "signal_score": 92, "verification": "verified", "outcome": "positive" },
+    { "id": "evt_106", "occurred_at": "2026-07-28T05:55:00Z", "title": "Scoped billing export change", "summary": "Turned an ambiguous request into explicit constraints and acceptance criteria.", "competency": "problem_solving", "signal_score": 87, "verification": "corroborated", "outcome": "positive" },
+    { "id": "evt_107", "occurred_at": "2026-07-25T08:50:00Z", "title": "Reworked event ownership boundary", "summary": "Compared two designs and documented the operational trade-off before implementation.", "competency": "architecture", "signal_score": 81, "verification": "verified", "outcome": "positive" },
+    { "id": "evt_108", "occurred_at": "2026-07-24T07:30:00Z", "title": "Implemented member search", "summary": "Completed the feature with review feedback resolved and CI passing.", "competency": "implementation", "signal_score": 86, "verification": "verified", "outcome": "positive" },
+    { "id": "evt_109", "occurred_at": "2026-07-23T09:05:00Z", "title": "Challenged generated migration", "summary": "Modified an AI proposal after identifying a backwards-compatibility risk.", "competency": "ai_collaboration", "signal_score": 92, "verification": "verified", "outcome": "positive" },
+    { "id": "evt_110", "occurred_at": "2026-07-22T07:15:00Z", "title": "Strengthened invoice test suite", "summary": "Added regression cases following an edge case found in review.", "competency": "testing", "signal_score": 67, "verification": "verified", "outcome": "positive" },
+    { "id": "evt_111", "occurred_at": "2026-07-20T06:10:00Z", "title": "Implemented audit feed filters", "summary": "Delivered a small feature with passing checks and clear handoff notes.", "competency": "implementation", "signal_score": 86, "verification": "corroborated", "outcome": "positive" },
+    { "id": "evt_112", "occurred_at": "2026-07-18T06:10:00Z", "title": "Investigated mobile image crash", "summary": "Captured device-specific evidence before discarding a generic AI fix.", "competency": "debugging", "signal_score": 94, "verification": "corroborated", "outcome": "positive" },
+    { "id": "evt_113", "occurred_at": "2026-07-17T06:10:00Z", "title": "Refined error-state UX", "summary": "Improved a generated implementation after testing real failure paths.", "competency": "ai_collaboration", "signal_score": 92, "verification": "corroborated", "outcome": "positive" }
+  ]
+}

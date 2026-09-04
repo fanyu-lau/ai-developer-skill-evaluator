@@ -1,0 +1,6 @@
+.pawskill/
+data/claude-history-summary.json
+data/claude-evaluation.json
+data/codex-evaluation.json
+data/prompt-sample.json
+data/prompting-feedback.json
