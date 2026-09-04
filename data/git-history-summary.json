@@ -1,7 +1,7 @@
 {
   "schema_version": "1",
   "source": "github_pull_requests",
-  "generated_at": "2026-08-13T05:06:26.562Z",
+  "generated_at": "2026-09-04T04:19:38.074Z",
   "privacy": {
     "raw_titles_stored": false,
     "raw_bodies_stored": false,
@@ -12,31 +12,199 @@
     "raw_authors_stored": false
   },
   "totals": {
-    "merged_pull_requests": 30,
-    "approved": 26,
-    "ci_passed": 0,
-    "test_files_touched": 8
+    "merged_pull_requests": 37,
+    "approved": 33,
+    "ci_passed": 22,
+    "test_files_touched": 10
   },
   "observed_practice": {
     "assessment_type": "verified_delivery_practice",
-    "pull_requests_analysed": 30,
-    "confidence": 100,
+    "pull_requests_analysed": 37,
     "indicators": {
-      "review_approval_rate": 87,
-      "ci_pass_rate": 0,
+      "review_approval_rate": 89,
+      "ci_pass_rate": 59,
       "test_coverage_rate": 27
+    },
+    "indicator_stats": {
+      "review_approval_rate": {
+        "estimate": 89,
+        "low": 75,
+        "high": 96,
+        "margin": 10,
+        "n": 37
+      },
+      "ci_pass_rate": {
+        "estimate": 59,
+        "low": 43,
+        "high": 74,
+        "margin": 15,
+        "n": 37
+      },
+      "test_coverage_rate": {
+        "estimate": 27,
+        "low": 15,
+        "high": 43,
+        "margin": 14,
+        "n": 37
+      }
     },
     "interpretation": [
       "This measures merged pull request outcomes (review approval, CI status, test file changes), not code quality or business impact.",
-      "It reflects delivery practice, not individual competency, and must not be used for hiring, promotion, compensation, or ranking people."
+      "It reflects delivery practice, not individual competency, and must not be used for hiring, promotion, compensation, or ranking people.",
+      "Each indicator carries a 95% Wilson interval (indicator_stats) based on the number of pull requests analysed — with few PRs, that interval is wide."
     ]
   },
   "pull_requests": [
     {
-      "pr_ref": "e793a5db648db360",
-      "merged_at": "2026-08-12T10:08:12Z",
+      "pr_ref": "100f6cf759379298",
+      "merged_at": "2026-09-01T02:59:35Z",
+      "review_decision": "APPROVED",
+      "ci_conclusion": "SUCCESS",
+      "files_changed": 1,
+      "test_files_changed": false,
+      "commit_timestamps": [
+        "2026-09-01T02:19:01Z"
+      ]
+    },
+    {
+      "pr_ref": "623e08c6e69cd914",
+      "merged_at": "2026-08-27T03:17:49Z",
+      "review_decision": "APPROVED",
+      "ci_conclusion": "SUCCESS",
+      "files_changed": 1,
+      "test_files_changed": false,
+      "commit_timestamps": [
+        "2026-08-27T03:05:24Z"
+      ]
+    },
+    {
+      "pr_ref": "ed1ba575a5adb770",
+      "merged_at": "2026-08-26T04:13:11Z",
+      "review_decision": "APPROVED",
+      "ci_conclusion": "SUCCESS",
+      "files_changed": 13,
+      "test_files_changed": false,
+      "commit_timestamps": [
+        "2026-08-18T10:23:45Z",
+        "2026-08-19T06:52:39Z",
+        "2026-08-19T08:20:21Z",
+        "2026-08-19T10:26:33Z",
+        "2026-08-20T03:46:08Z",
+        "2026-08-20T04:37:33Z",
+        "2026-08-24T02:34:04Z",
+        "2026-08-24T04:12:34Z",
+        "2026-08-24T08:53:55Z",
+        "2026-08-25T04:16:56Z",
+        "2026-08-26T03:51:47Z"
+      ]
+    },
+    {
+      "pr_ref": "c36d7426fe220967",
+      "merged_at": "2026-08-26T04:13:21Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "FAILURE",
+      "files_changed": 55,
+      "test_files_changed": true,
+      "commit_timestamps": [
+        "2026-08-26T03:47:56Z",
+        "2026-08-26T03:47:56Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z",
+        "2026-08-26T03:47:57Z"
+      ]
+    },
+    {
+      "pr_ref": "c46272455040b19d",
+      "merged_at": "2026-08-13T11:04:13Z",
+      "review_decision": "APPROVED",
+      "ci_conclusion": "SUCCESS",
+      "files_changed": 2,
+      "test_files_changed": false,
+      "commit_timestamps": [
+        "2026-08-13T10:53:05Z",
+        "2026-08-13T11:00:34Z",
+        "2026-08-13T11:02:30Z"
+      ]
+    },
+    {
+      "pr_ref": "7702c0bf377ebe22",
+      "merged_at": "2026-08-24T02:09:14Z",
+      "review_decision": "APPROVED",
+      "ci_conclusion": "FAILURE",
+      "files_changed": 4,
+      "test_files_changed": false,
+      "commit_timestamps": [
+        "2026-08-06T08:17:51Z",
+        "2026-08-11T02:16:15Z",
+        "2026-08-19T06:52:49Z",
+        "2026-08-20T02:04:27Z",
+        "2026-08-20T02:07:04Z",
+        "2026-08-24T01:49:55Z"
+      ]
+    },
+    {
+      "pr_ref": "6b7380184448abc8",
+      "merged_at": "2026-08-24T02:12:07Z",
+      "review_decision": "APPROVED",
+      "ci_conclusion": "FAILURE",
+      "files_changed": 51,
+      "test_files_changed": true,
+      "commit_timestamps": [
+        "2026-08-06T06:40:51Z",
+        "2026-08-06T08:14:17Z",
+        "2026-08-06T08:15:59Z",
+        "2026-08-06T08:40:03Z",
+        "2026-08-06T09:18:59Z",
+        "2026-08-07T02:08:52Z",
+        "2026-08-07T03:46:58Z",
+        "2026-08-07T04:07:56Z",
+        "2026-08-07T04:21:37Z",
+        "2026-08-07T04:41:49Z",
+        "2026-08-07T06:39:37Z",
+        "2026-08-07T06:48:56Z",
+        "2026-08-07T07:11:22Z",
+        "2026-08-07T07:23:00Z",
+        "2026-08-07T09:03:19Z",
+        "2026-08-07T10:06:19Z",
+        "2026-08-11T01:44:27Z",
+        "2026-08-11T02:16:05Z",
+        "2026-08-11T03:46:30Z",
+        "2026-08-11T04:05:06Z",
+        "2026-08-11T04:31:48Z",
+        "2026-08-12T01:49:36Z",
+        "2026-08-13T06:49:08Z",
+        "2026-08-13T07:18:26Z",
+        "2026-08-13T07:19:05Z",
+        "2026-08-14T02:53:11Z",
+        "2026-08-14T10:30:57Z",
+        "2026-08-14T10:33:38Z",
+        "2026-08-17T04:49:24Z",
+        "2026-08-17T07:15:00Z",
+        "2026-08-17T09:56:22Z",
+        "2026-08-20T10:23:51Z",
+        "2026-08-21T06:27:03Z",
+        "2026-08-21T06:43:34Z",
+        "2026-08-21T10:44:29Z",
+        "2026-08-24T01:48:12Z"
+      ]
+    },
+    {
+      "pr_ref": "a8543eb41dc75fd7",
+      "merged_at": "2026-08-12T10:08:12Z",
+      "review_decision": "APPROVED",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 1,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -49,7 +217,7 @@
       ]
     },
     {
-      "pr_ref": "2d480612cab36d6a",
+      "pr_ref": "a0185bd6cf930dc2",
       "merged_at": "2026-07-28T04:35:58Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "NONE",
@@ -62,7 +230,7 @@
       ]
     },
     {
-      "pr_ref": "1f6da6ed4569a6c2",
+      "pr_ref": "d84d47279c1e320b",
       "merged_at": "2026-07-09T10:15:38Z",
       "review_decision": "NONE",
       "ci_conclusion": "NONE",
@@ -73,7 +241,7 @@
       ]
     },
     {
-      "pr_ref": "ed3f806d935e29aa",
+      "pr_ref": "3f64ced7cea1b179",
       "merged_at": "2026-07-09T09:48:26Z",
       "review_decision": "NONE",
       "ci_conclusion": "NONE",
@@ -84,7 +252,7 @@
       ]
     },
     {
-      "pr_ref": "22e80a534050222b",
+      "pr_ref": "4f363b5d697acbed",
       "merged_at": "2026-07-09T09:18:12Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "NONE",
@@ -95,10 +263,10 @@
       ]
     },
     {
-      "pr_ref": "d6e2cdb310eb1175",
+      "pr_ref": "c369300898865c77",
       "merged_at": "2026-07-09T09:12:08Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 5,
       "test_files_changed": true,
       "commit_timestamps": [
@@ -107,7 +275,7 @@
       ]
     },
     {
-      "pr_ref": "a69e2ed22332b34b",
+      "pr_ref": "19f8a1e75ac59974",
       "merged_at": "2026-07-09T06:57:24Z",
       "review_decision": "NONE",
       "ci_conclusion": "NONE",
@@ -120,10 +288,10 @@
       ]
     },
     {
-      "pr_ref": "1746fb205ea629a6",
+      "pr_ref": "d425029e527315e7",
       "merged_at": "2026-07-09T06:39:25Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 11,
       "test_files_changed": true,
       "commit_timestamps": [
@@ -134,10 +302,10 @@
       ]
     },
     {
-      "pr_ref": "601a6aad03717808",
+      "pr_ref": "4d812b934f47c47b",
       "merged_at": "2026-07-14T06:54:31Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 4,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -146,10 +314,10 @@
       ]
     },
     {
-      "pr_ref": "e9f2999041eca84d",
+      "pr_ref": "872e036e33a6b68d",
       "merged_at": "2026-07-06T07:55:25Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 4,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -158,10 +326,10 @@
       ]
     },
     {
-      "pr_ref": "6d3d5b1f6272aab9",
+      "pr_ref": "fbfead1c8187b91a",
       "merged_at": "2026-07-03T04:11:34Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 1,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -171,7 +339,7 @@
       ]
     },
     {
-      "pr_ref": "cb5eb3ba048d4093",
+      "pr_ref": "cc93f2a6b26fb3f2",
       "merged_at": "2026-07-06T07:54:38Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "FAILURE",
@@ -187,7 +355,7 @@
       ]
     },
     {
-      "pr_ref": "a6aae5d8cb2eaf32",
+      "pr_ref": "737f4a820b41e907",
       "merged_at": "2026-07-01T03:42:36Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "FAILURE",
@@ -198,10 +366,10 @@
       ]
     },
     {
-      "pr_ref": "6652e700b2fbb9f0",
+      "pr_ref": "f6fa9d415dd60cb0",
       "merged_at": "2026-06-30T09:29:30Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 2,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -213,10 +381,10 @@
       ]
     },
     {
-      "pr_ref": "000d9dc35cab6135",
+      "pr_ref": "1ae6b0c6c23af83e",
       "merged_at": "2026-06-30T08:56:04Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 53,
       "test_files_changed": true,
       "commit_timestamps": [
@@ -227,7 +395,7 @@
       ]
     },
     {
-      "pr_ref": "96b61ca60334086b",
+      "pr_ref": "c91876487aa55b7d",
       "merged_at": "2026-06-30T08:30:36Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "FAILURE",
@@ -238,7 +406,7 @@
       ]
     },
     {
-      "pr_ref": "6c1dd19f22e046d2",
+      "pr_ref": "b0ab64e0d51cee4e",
       "merged_at": "2026-06-30T07:35:15Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "FAILURE",
@@ -332,10 +500,10 @@
       ]
     },
     {
-      "pr_ref": "9cf353222a19e3c8",
+      "pr_ref": "e97873d065197066",
       "merged_at": "2026-06-30T04:06:56Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 18,
       "test_files_changed": true,
       "commit_timestamps": [
@@ -352,10 +520,10 @@
       ]
     },
     {
-      "pr_ref": "f5088d35580d9600",
+      "pr_ref": "9f138b138847ebbe",
       "merged_at": "2026-06-30T04:06:48Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 3,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -371,10 +539,10 @@
       ]
     },
     {
-      "pr_ref": "6af74e904d07f96e",
+      "pr_ref": "24d38c9b232f7a13",
       "merged_at": "2026-06-30T07:35:27Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 1,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -383,7 +551,7 @@
       ]
     },
     {
-      "pr_ref": "fb93d29d1621d37e",
+      "pr_ref": "246c8f879d2897d6",
       "merged_at": "2026-06-11T10:16:32Z",
       "review_decision": "NONE",
       "ci_conclusion": "FAILURE",
@@ -394,10 +562,10 @@
       ]
     },
     {
-      "pr_ref": "6a1f7b573f0bc53b",
+      "pr_ref": "5ba8f08594acd501",
       "merged_at": "2026-06-11T06:42:09Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 25,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -433,10 +601,10 @@
       ]
     },
     {
-      "pr_ref": "c4f88b757a371794",
+      "pr_ref": "7d2083608ca22dcd",
       "merged_at": "2026-06-11T06:42:30Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 5,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -470,7 +638,7 @@
       ]
     },
     {
-      "pr_ref": "5380f39d84109990",
+      "pr_ref": "6019521c7e900c20",
       "merged_at": "2026-05-26T07:59:02Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "NONE",
@@ -481,10 +649,10 @@
       ]
     },
     {
-      "pr_ref": "56daae7286f12c56",
+      "pr_ref": "878d6b3dfd7062d4",
       "merged_at": "2026-05-29T09:46:53Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 73,
       "test_files_changed": true,
       "commit_timestamps": [
@@ -560,10 +728,10 @@
       ]
     },
     {
-      "pr_ref": "12ca9691f260f7d1",
+      "pr_ref": "9d3670e67712b6be",
       "merged_at": "2026-04-29T10:06:38Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 1,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -574,10 +742,10 @@
       ]
     },
     {
-      "pr_ref": "1c589130375df315",
+      "pr_ref": "5a4f7a7be9226882",
       "merged_at": "2026-04-29T08:43:06Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 1,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -588,10 +756,10 @@
       ]
     },
     {
-      "pr_ref": "e5a0fcafc217061f",
+      "pr_ref": "cad655b2b1bd97a3",
       "merged_at": "2026-04-29T06:30:20Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 1,
       "test_files_changed": false,
       "commit_timestamps": [
@@ -601,7 +769,7 @@
       ]
     },
     {
-      "pr_ref": "3736ac172a3386b4",
+      "pr_ref": "26dba83d267c19dd",
       "merged_at": "2026-04-30T08:25:53Z",
       "review_decision": "APPROVED",
       "ci_conclusion": "FAILURE",
@@ -622,10 +790,10 @@
       ]
     },
     {
-      "pr_ref": "5fe5024a035ae24c",
+      "pr_ref": "d7030b411ffb5d66",
       "merged_at": "2026-04-27T07:47:23Z",
       "review_decision": "APPROVED",
-      "ci_conclusion": "FAILURE",
+      "ci_conclusion": "SUCCESS",
       "files_changed": 9,
       "test_files_changed": false,
       "commit_timestamps": [

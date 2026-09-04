@@ -1,4 +1,5 @@
 import { createHash, randomBytes } from "node:crypto";
+import { wilsonInterval } from "./stats.js";
 
 const TEST_COMMAND = /\b(npm|pnpm|yarn|bun)\s+(run\s+)?(test|check|lint)|\b(pytest|vitest|jest|mocha|ava|rspec|go\s+test|cargo\s+test|flutter\s+test|gradle\s+test|mvn\s+test)\b/i;
 const REVERT_COMMAND = /\bgit\s+(checkout|reset|restore|revert)\b/i;
@@ -109,17 +110,27 @@ export function gradeObservedPractice(sessions) {
     iterative_collaboration: clamp(ratio(iterative.length, active.length) * 100),
     test_execution: clamp(ratio(tested.length, active.length) * 100)
   };
-  const confidence = clamp(Math.min(active.length / 12, 1) * 100);
+  // Each indicator gets its own Wilson interval against its own denominator (changed
+  // sessions for the two edit-scoped indicators, all active sessions for the other two)
+  // rather than one report-wide "confidence" ramp — the earlier version reused a single
+  // arbitrary sample-size threshold for every indicator regardless of its real n.
+  const indicator_stats = {
+    investigation_before_change: wilsonInterval(investigated.length, changed.length),
+    validation_during_change: wilsonInterval(validated.length, changed.length),
+    iterative_collaboration: wilsonInterval(iterative.length, active.length),
+    test_execution: wilsonInterval(tested.length, active.length)
+  };
 
   return {
     assessment_type: "provisional_observed_practice",
     sessions_analysed: active.length,
-    confidence,
     indicators,
+    indicator_stats,
     interpretation: [
       "This measures observable workflow patterns from local Claude Code history, not engineering ability or employment performance.",
       "It cannot establish code quality, correctness, root-cause reasoning, or business impact without independent evidence from Git, reviews, tests or CI.",
-      "Scores must not be used for hiring, promotion, compensation, or ranking people."
+      "Scores must not be used for hiring, promotion, compensation, or ranking people.",
+      "Each indicator carries a 95% Wilson interval (indicator_stats) based on its own sample size — small samples produce wide intervals, and a percentage without its interval should not be read as precise."
     ]
   };
 }
@@ -138,15 +149,22 @@ export function gradeAiCollaboration(sessions) {
   return {
     assessment_type: "approximate_workflow_pattern",
     edits_analysed: editsAnalysed,
-    confidence: clamp(Math.min(editsAnalysed / 30, 1) * 100),
     indicators: {
       used_directly: clamp(ratio(totals.used_directly, editsAnalysed) * 100),
       modified: clamp(ratio(totals.modified, editsAnalysed) * 100),
       rejected: clamp(ratio(totals.rejected, editsAnalysed) * 100)
     },
+    // Wilson interval per outcome against the same denominator (total edits classified) —
+    // replaces a single edits/30 sample-size ramp that said nothing about any one outcome.
+    indicator_stats: {
+      used_directly: wilsonInterval(totals.used_directly, editsAnalysed),
+      modified: wilsonInterval(totals.modified, editsAnalysed),
+      rejected: wilsonInterval(totals.rejected, editsAnalysed)
+    },
     interpretation: [
       "This approximates what happened after each AI-proposed edit: if the very next tool call is another edit, it's counted as a quick revision (\"modified\"); otherwise a git checkout/reset/restore/revert before the next edit suggests it was undone (\"rejected\"); otherwise it's counted as kept (\"used directly\").",
       "This is a coarse, session-level pattern, not a per-suggestion audit — it cannot see which file was touched, so an edit followed by an unrelated edit elsewhere still counts as \"modified\".",
+      "Each outcome carries a 95% Wilson interval (indicator_stats) against the total edits classified — with few edits analysed, that interval is wide.",
       "Must not be used for hiring, promotion, compensation, or ranking people."
     ]
   };

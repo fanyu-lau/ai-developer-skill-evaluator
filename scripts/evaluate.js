@@ -6,6 +6,7 @@ import { buildArchetypeProfile } from "../src/archetypes.js";
 import { observedPracticeEvents, gradeObservedPractice } from "../src/claude-history.js";
 import { pullRequestEvents } from "../src/git-history.js";
 import { correlateSessionsWithPullRequests } from "../src/git-correlation.js";
+import { compareObservedSignals } from "../src/measurement-check.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -47,10 +48,15 @@ try {
   // reviewed, CI-passed merged pull request are re-graded separately and promoted to
   // "verified" — the one link from raw activity to a confirmed outcome this pipeline
   // can make. Everything else stays "observed".
+  const correlationWindowHoursOption = option("--correlation-window-hours");
+  const correlationWindowHours = correlationWindowHoursOption ? Number(correlationWindowHoursOption) : undefined;
+
   let historyEvents = [];
   let correlatedSessions = 0;
+  let correlationWindowUsed = null;
   if (history?.sessions?.length && gitHistory?.pull_requests?.length) {
-    const { matched, unmatched } = correlateSessionsWithPullRequests(history.sessions, gitHistory.pull_requests);
+    const { matched, unmatched } = correlateSessionsWithPullRequests(history.sessions, gitHistory.pull_requests, correlationWindowHours ? { windowHours: correlationWindowHours } : {});
+    correlationWindowUsed = correlationWindowHours ?? 96; // keep in sync with DEFAULT_WINDOW_HOURS in src/git-correlation.js
     correlatedSessions = matched.length;
     if (matched.length) historyEvents.push(...observedPracticeEvents({ ...history, observed_practice: gradeObservedPractice(matched) }, { verification: "verified", idPrefix: "hist_verified" }));
     if (unmatched.length) historyEvents.push(...observedPracticeEvents({ ...history, observed_practice: gradeObservedPractice(unmatched) }, { idPrefix: "hist_observed" }));
@@ -82,6 +88,7 @@ try {
     timeline: createEvidenceTimeline(events, Infinity),
     archetypes: buildArchetypeProfile(evaluation.dimensions),
     ai_collaboration: aiCollaboration,
+    measurement_check: compareObservedSignals(history, gitHistory),
     sources: [curatedEvents.length && "Curated evidence", history && "Claude Code", gitHistory && "GitHub"].filter(Boolean)
   };
 
@@ -89,7 +96,7 @@ try {
 
   const parts = [];
   if (curatedEvents.length) parts.push(`${curatedEvents.length} curated evidence events`);
-  if (historyEvents.length) parts.push(`${historyEvents.length} Claude history signals${correlatedSessions ? ` (${correlatedSessions} sessions corroborated by verified pull requests)` : ""}`);
+  if (historyEvents.length) parts.push(`${historyEvents.length} Claude history signals${correlatedSessions ? ` (${correlatedSessions} sessions promoted to verified, within ${correlationWindowUsed}h of an approved+CI-passed merge)` : ""}`);
   if (gitEvents.length) parts.push(`${gitEvents.length} pull request signals`);
   console.log(`Generated ${outputPath.pathname} — overall score ${profile.overall}/100 from ${parts.join(", ")}.`);
 } catch (error) {

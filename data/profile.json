@@ -5,9 +5,9 @@
   },
   "period": "All imported history",
   "methodology_version": "0.1",
-  "overall": 64,
+  "overall": 65,
   "prior_delta": 0,
-  "verified_outcomes": 0,
+  "verified_outcomes": 3,
   "dimensions": [
     {
       "id": "problem_solving",
@@ -15,10 +15,10 @@
       "weight": 0.18,
       "color": "#4a9569",
       "tint": "#e5f3e8",
-      "score": 100,
-      "confidence": 18,
-      "evidence_count": 1,
-      "verified_count": 0
+      "score": 65,
+      "confidence": 52,
+      "evidence_count": 2,
+      "verified_count": 1
     },
     {
       "id": "debugging",
@@ -37,7 +37,7 @@
       "weight": 0.16,
       "color": "#5a9f86",
       "tint": "#e6f3ed",
-      "score": 87,
+      "score": 89,
       "confidence": 27,
       "evidence_count": 1,
       "verified_count": 0
@@ -48,7 +48,7 @@
       "weight": 0.16,
       "color": "#83a85a",
       "tint": "#eef4dc",
-      "score": 0,
+      "score": 59,
       "confidence": 27,
       "evidence_count": 1,
       "verified_count": 0
@@ -59,10 +59,10 @@
       "weight": 0.15,
       "color": "#d49749",
       "tint": "#f9eedc",
-      "score": 52,
-      "confidence": 63,
-      "evidence_count": 3,
-      "verified_count": 0
+      "score": 37,
+      "confidence": 100,
+      "evidence_count": 5,
+      "verified_count": 2
     },
     {
       "id": "ai_collaboration",
@@ -70,90 +70,118 @@
       "weight": 0.15,
       "color": "#5084a2",
       "tint": "#e2eff5",
-      "score": 78,
-      "confidence": 18,
-      "evidence_count": 1,
-      "verified_count": 0
+      "score": 75,
+      "confidence": 52,
+      "evidence_count": 2,
+      "verified_count": 1
     }
   ],
-  "generated_at": "2026-09-02T04:20:24.519Z",
+  "generated_at": "2026-09-04T04:19:40.380Z",
   "timeline": [
     {
-      "date": "AUG 13",
+      "date": "SEP 04",
       "title": "Pull requests approved on review",
       "competency": "Architecture",
-      "detail": "87% of 30 analysed merged pull requests. Derived from GitHub review/CI status, not a per-session verified outcome.",
+      "detail": "89% of 37 analysed merged pull requests. Derived from GitHub review/CI status, not a per-session verified outcome.",
       "style": "review"
     },
     {
-      "date": "AUG 13",
+      "date": "SEP 04",
       "title": "Pull requests passed CI checks",
       "competency": "Implementation",
-      "detail": "0% of 30 analysed merged pull requests. Derived from GitHub review/CI status, not a per-session verified outcome.",
+      "detail": "59% of 37 analysed merged pull requests. Derived from GitHub review/CI status, not a per-session verified outcome.",
       "style": ""
     },
     {
-      "date": "AUG 13",
+      "date": "SEP 04",
       "title": "Pull requests included test file changes",
       "competency": "Testing",
-      "detail": "27% of 30 analysed merged pull requests. Derived from GitHub review/CI status, not a per-session verified outcome.",
+      "detail": "27% of 37 analysed merged pull requests. Derived from GitHub review/CI status, not a per-session verified outcome.",
+      "style": "test"
+    },
+    {
+      "date": "SEP 04",
+      "title": "Investigated context before changing code",
+      "competency": "Problem solving",
+      "detail": "Observed in 100% of relevant sessions across 26 analysed Claude Code sessions. Time-correlated with a reviewed, CI-passed pull request.",
+      "style": ""
+    },
+    {
+      "date": "SEP 04",
+      "title": "Validated changes while editing",
+      "competency": "Testing",
+      "detail": "Observed in 88% of relevant sessions across 26 analysed Claude Code sessions. Time-correlated with a reviewed, CI-passed pull request.",
+      "style": "test"
+    },
+    {
+      "date": "SEP 04",
+      "title": "Iterated collaboratively across turns",
+      "competency": "AI collaboration",
+      "detail": "Observed in 62% of relevant sessions across 26 analysed Claude Code sessions. Time-correlated with a reviewed, CI-passed pull request.",
+      "style": ""
+    },
+    {
+      "date": "SEP 04",
+      "title": "Ran tests during sessions",
+      "competency": "Testing",
+      "detail": "Observed in 35% of relevant sessions across 26 analysed Claude Code sessions. Time-correlated with a reviewed, CI-passed pull request.",
       "style": "test"
     }
   ],
   "archetypes": {
     "framing": "These are evidence-informed engineering work-style archetypes, not fixed personality labels or performance ratings.",
     "primary": {
-      "id": "fox",
-      "animal": "Fox",
-      "title": "The Strategist",
-      "icon": "🦊",
-      "color": "#c17452",
-      "description": "Resourceful and deliberate. Foxes frame ambiguity, see options early and choose a path with intent.",
+      "id": "spider",
+      "animal": "Spider",
+      "title": "The Architect",
+      "icon": "🕷️",
+      "color": "#5d697e",
+      "description": "Structured and patient. Spiders design strong foundations and make complexity easier to navigate.",
       "signals": {
-        "problem_solving": 0.42,
-        "architecture": 0.35,
-        "ai_collaboration": 0.23
+        "architecture": 0.7,
+        "implementation": 0.18,
+        "problem_solving": 0.12
       },
-      "strengths": "Creates clarity before momentum.",
+      "strengths": "Designs patterns that hold as a system grows.",
       "very_compatible": [
-        "owl",
-        "spider"
+        "octopus",
+        "fox"
       ],
       "compatible": [
-        "hawk",
-        "chameleon"
+        "owl",
+        "elephant"
       ],
-      "score": 90,
-      "level": "Master",
+      "score": 81,
+      "level": "Senior",
       "avatar": {
-        "label": "Guide",
-        "mark": "✺",
-        "description": "Demonstrating broad, consistent practice in complex contexts.",
-        "visual": "A radiant laurel crest that signals a mature, evidence-backed practice."
+        "label": "Practitioner",
+        "mark": "◆",
+        "description": "Showing a repeatable practice across real engineering work.",
+        "visual": "A practical compass badge that signals reliable craft."
       }
     },
     "secondary": {
-      "id": "chameleon",
-      "animal": "Chameleon",
-      "title": "The Adapter",
-      "icon": "🦎",
-      "color": "#579978",
-      "description": "Flexible and quick to learn. Chameleons adapt tools and approaches to fit the real context.",
+      "id": "octopus",
+      "animal": "Octopus",
+      "title": "The Systems Thinker",
+      "icon": "🐙",
+      "color": "#836b9f",
+      "description": "Curious across connections. Octopuses see dependencies, interfaces and the moving parts around a change.",
       "signals": {
-        "ai_collaboration": 0.46,
-        "problem_solving": 0.31,
-        "architecture": 0.23
+        "architecture": 0.62,
+        "problem_solving": 0.23,
+        "implementation": 0.15
       },
-      "strengths": "Finds a useful approach when the context changes.",
+      "strengths": "Connects local decisions to whole-system effects.",
       "very_compatible": [
-        "octopus",
-        "raven"
+        "spider",
+        "chameleon"
       ],
       "compatible": [
         "fox",
-        "dolphin"
+        "elephant"
       ],
-      "score": 87,
+      "score": 79,
       "level": "Senior",
       "avatar": {
         "label": "Practitioner",
@@ -164,6 +192,52 @@
     },
     "compatible": {
       "very": [
+        {
+          "id": "octopus",
+          "animal": "Octopus",
+          "title": "The Systems Thinker",
+          "icon": "🐙",
+          "color": "#836b9f",
+          "description": "Curious across connections. Octopuses see dependencies, interfaces and the moving parts around a change.",
+          "signals": {
+            "architecture": 0.62,
+            "problem_solving": 0.23,
+            "implementation": 0.15
+          },
+          "strengths": "Connects local decisions to whole-system effects.",
+          "very_compatible": [
+            "spider",
+            "chameleon"
+          ],
+          "compatible": [
+            "fox",
+            "elephant"
+          ]
+        },
+        {
+          "id": "fox",
+          "animal": "Fox",
+          "title": "The Strategist",
+          "icon": "🦊",
+          "color": "#c17452",
+          "description": "Resourceful and deliberate. Foxes frame ambiguity, see options early and choose a path with intent.",
+          "signals": {
+            "problem_solving": 0.42,
+            "architecture": 0.35,
+            "ai_collaboration": 0.23
+          },
+          "strengths": "Creates clarity before momentum.",
+          "very_compatible": [
+            "owl",
+            "spider"
+          ],
+          "compatible": [
+            "hawk",
+            "chameleon"
+          ]
+        }
+      ],
+      "okay": [
         {
           "id": "owl",
           "animal": "Owl",
@@ -187,128 +261,52 @@
           ]
         },
         {
-          "id": "spider",
-          "animal": "Spider",
-          "title": "The Architect",
-          "icon": "🕷️",
-          "color": "#5d697e",
-          "description": "Structured and patient. Spiders design strong foundations and make complexity easier to navigate.",
+          "id": "elephant",
+          "animal": "Elephant",
+          "title": "The Steward",
+          "icon": "🐘",
+          "color": "#6f8290",
+          "description": "Thoughtful and protective. Elephants consider reliability, maintenance and the people affected by change.",
           "signals": {
-            "architecture": 0.7,
-            "implementation": 0.18,
-            "problem_solving": 0.12
+            "testing": 0.34,
+            "architecture": 0.35,
+            "implementation": 0.31
           },
-          "strengths": "Designs patterns that hold as a system grows.",
+          "strengths": "Protects long-term trust in the system.",
           "very_compatible": [
-            "octopus",
-            "fox"
-          ],
-          "compatible": [
-            "owl",
-            "elephant"
-          ]
-        }
-      ],
-      "okay": [
-        {
-          "id": "hawk",
-          "animal": "Hawk",
-          "title": "The Focused Operator",
-          "icon": "🦅",
-          "color": "#8a6a43",
-          "description": "Clear-eyed and decisive. Hawks identify the highest-value next move and finish what matters.",
-          "signals": {
-            "implementation": 0.48,
-            "problem_solving": 0.26,
-            "ai_collaboration": 0.26
-          },
-          "strengths": "Converts priorities into momentum.",
-          "very_compatible": [
-            "beaver",
+            "ant",
             "dolphin"
           ],
           "compatible": [
-            "fox",
-            "badger"
-          ]
-        },
-        {
-          "id": "chameleon",
-          "animal": "Chameleon",
-          "title": "The Adapter",
-          "icon": "🦎",
-          "color": "#579978",
-          "description": "Flexible and quick to learn. Chameleons adapt tools and approaches to fit the real context.",
-          "signals": {
-            "ai_collaboration": 0.46,
-            "problem_solving": 0.31,
-            "architecture": 0.23
-          },
-          "strengths": "Finds a useful approach when the context changes.",
-          "very_compatible": [
-            "octopus",
-            "raven"
-          ],
-          "compatible": [
-            "fox",
-            "dolphin"
+            "spider",
+            "octopus"
           ]
         }
       ]
     },
     "all": [
       {
-        "id": "fox",
-        "animal": "Fox",
-        "title": "The Strategist",
-        "icon": "🦊",
-        "color": "#c17452",
-        "description": "Resourceful and deliberate. Foxes frame ambiguity, see options early and choose a path with intent.",
+        "id": "spider",
+        "animal": "Spider",
+        "title": "The Architect",
+        "icon": "🕷️",
+        "color": "#5d697e",
+        "description": "Structured and patient. Spiders design strong foundations and make complexity easier to navigate.",
         "signals": {
-          "problem_solving": 0.42,
-          "architecture": 0.35,
-          "ai_collaboration": 0.23
+          "architecture": 0.7,
+          "implementation": 0.18,
+          "problem_solving": 0.12
         },
-        "strengths": "Creates clarity before momentum.",
-        "very_compatible": [
-          "owl",
-          "spider"
-        ],
-        "compatible": [
-          "hawk",
-          "chameleon"
-        ],
-        "score": 90,
-        "level": "Master",
-        "avatar": {
-          "label": "Guide",
-          "mark": "✺",
-          "description": "Demonstrating broad, consistent practice in complex contexts.",
-          "visual": "A radiant laurel crest that signals a mature, evidence-backed practice."
-        }
-      },
-      {
-        "id": "chameleon",
-        "animal": "Chameleon",
-        "title": "The Adapter",
-        "icon": "🦎",
-        "color": "#579978",
-        "description": "Flexible and quick to learn. Chameleons adapt tools and approaches to fit the real context.",
-        "signals": {
-          "ai_collaboration": 0.46,
-          "problem_solving": 0.31,
-          "architecture": 0.23
-        },
-        "strengths": "Finds a useful approach when the context changes.",
+        "strengths": "Designs patterns that hold as a system grows.",
         "very_compatible": [
           "octopus",
-          "raven"
+          "fox"
         ],
         "compatible": [
-          "fox",
-          "dolphin"
+          "owl",
+          "elephant"
         ],
-        "score": 87,
+        "score": 81,
         "level": "Senior",
         "avatar": {
           "label": "Practitioner",
@@ -338,7 +336,7 @@
           "fox",
           "elephant"
         ],
-        "score": 77,
+        "score": 79,
         "level": "Senior",
         "avatar": {
           "label": "Practitioner",
@@ -348,27 +346,57 @@
         }
       },
       {
-        "id": "spider",
-        "animal": "Spider",
-        "title": "The Architect",
-        "icon": "🕷️",
-        "color": "#5d697e",
-        "description": "Structured and patient. Spiders design strong foundations and make complexity easier to navigate.",
+        "id": "fox",
+        "animal": "Fox",
+        "title": "The Strategist",
+        "icon": "🦊",
+        "color": "#c17452",
+        "description": "Resourceful and deliberate. Foxes frame ambiguity, see options early and choose a path with intent.",
         "signals": {
-          "architecture": 0.7,
-          "implementation": 0.18,
-          "problem_solving": 0.12
+          "problem_solving": 0.42,
+          "architecture": 0.35,
+          "ai_collaboration": 0.23
         },
-        "strengths": "Designs patterns that hold as a system grows.",
+        "strengths": "Creates clarity before momentum.",
         "very_compatible": [
-          "octopus",
-          "fox"
+          "owl",
+          "spider"
         ],
         "compatible": [
-          "owl",
-          "elephant"
+          "hawk",
+          "chameleon"
         ],
-        "score": 73,
+        "score": 76,
+        "level": "Senior",
+        "avatar": {
+          "label": "Practitioner",
+          "mark": "◆",
+          "description": "Showing a repeatable practice across real engineering work.",
+          "visual": "A practical compass badge that signals reliable craft."
+        }
+      },
+      {
+        "id": "chameleon",
+        "animal": "Chameleon",
+        "title": "The Adapter",
+        "icon": "🦎",
+        "color": "#579978",
+        "description": "Flexible and quick to learn. Chameleons adapt tools and approaches to fit the real context.",
+        "signals": {
+          "ai_collaboration": 0.46,
+          "problem_solving": 0.31,
+          "architecture": 0.23
+        },
+        "strengths": "Finds a useful approach when the context changes.",
+        "very_compatible": [
+          "octopus",
+          "raven"
+        ],
+        "compatible": [
+          "fox",
+          "dolphin"
+        ],
+        "score": 75,
         "level": "Senior",
         "avatar": {
           "label": "Practitioner",
@@ -398,97 +426,7 @@
           "beaver",
           "chameleon"
         ],
-        "score": 67,
-        "level": "Junior",
-        "avatar": {
-          "label": "Explorer",
-          "mark": "✦",
-          "description": "Building the habit and learning where to look next.",
-          "visual": "A fresh field journal and a small discovery sparkle."
-        }
-      },
-      {
-        "id": "raven",
-        "animal": "Raven",
-        "title": "The Challenger",
-        "icon": "🐦‍⬛",
-        "color": "#454c60",
-        "description": "Independent and discerning. Ravens question defaults, test AI output and surface the overlooked risk.",
-        "signals": {
-          "ai_collaboration": 0.55,
-          "debugging": 0.26,
-          "problem_solving": 0.19
-        },
-        "strengths": "Improves decisions by asking the question others skip.",
-        "very_compatible": [
-          "chameleon",
-          "owl"
-        ],
-        "compatible": [
-          "badger",
-          "fox"
-        ],
-        "score": 62,
-        "level": "Junior",
-        "avatar": {
-          "label": "Explorer",
-          "mark": "✦",
-          "description": "Building the habit and learning where to look next.",
-          "visual": "A fresh field journal and a small discovery sparkle."
-        }
-      },
-      {
-        "id": "owl",
-        "animal": "Owl",
-        "title": "The Investigator",
-        "icon": "🦉",
-        "color": "#4f7a61",
-        "description": "Observant and methodical. Owls gather context, compare signals and resist the first plausible answer.",
-        "signals": {
-          "problem_solving": 0.36,
-          "debugging": 0.38,
-          "ai_collaboration": 0.26
-        },
-        "strengths": "Turns uncertainty into testable hypotheses.",
-        "very_compatible": [
-          "fox",
-          "badger"
-        ],
-        "compatible": [
-          "ant",
-          "raven"
-        ],
-        "score": 56,
-        "level": "Junior",
-        "avatar": {
-          "label": "Explorer",
-          "mark": "✦",
-          "description": "Building the habit and learning where to look next.",
-          "visual": "A fresh field journal and a small discovery sparkle."
-        }
-      },
-      {
-        "id": "elephant",
-        "animal": "Elephant",
-        "title": "The Steward",
-        "icon": "🐘",
-        "color": "#6f8290",
-        "description": "Thoughtful and protective. Elephants consider reliability, maintenance and the people affected by change.",
-        "signals": {
-          "testing": 0.34,
-          "architecture": 0.35,
-          "implementation": 0.31
-        },
-        "strengths": "Protects long-term trust in the system.",
-        "very_compatible": [
-          "ant",
-          "dolphin"
-        ],
-        "compatible": [
-          "spider",
-          "octopus"
-        ],
-        "score": 48,
+        "score": 70,
         "level": "Junior",
         "avatar": {
           "label": "Explorer",
@@ -518,7 +456,7 @@
           "fox",
           "badger"
         ],
-        "score": 46,
+        "score": 65,
         "level": "Junior",
         "avatar": {
           "label": "Explorer",
@@ -528,57 +466,27 @@
         }
       },
       {
-        "id": "ant",
-        "animal": "Ant",
-        "title": "The Validator",
-        "icon": "🐜",
-        "color": "#b17b48",
-        "description": "Careful and dependable. Ants notice edge cases, verify assumptions and help make quality repeatable.",
+        "id": "elephant",
+        "animal": "Elephant",
+        "title": "The Steward",
+        "icon": "🐘",
+        "color": "#6f8290",
+        "description": "Thoughtful and protective. Elephants consider reliability, maintenance and the people affected by change.",
         "signals": {
-          "testing": 0.62,
-          "implementation": 0.22,
-          "debugging": 0.16
+          "testing": 0.34,
+          "architecture": 0.35,
+          "implementation": 0.31
         },
-        "strengths": "Makes confidence measurable through validation.",
+        "strengths": "Protects long-term trust in the system.",
         "very_compatible": [
-          "beaver",
-          "elephant"
+          "ant",
+          "dolphin"
         ],
         "compatible": [
-          "owl",
-          "badger"
+          "spider",
+          "octopus"
         ],
-        "score": 32,
-        "level": "Junior",
-        "avatar": {
-          "label": "Explorer",
-          "mark": "✦",
-          "description": "Building the habit and learning where to look next.",
-          "visual": "A fresh field journal and a small discovery sparkle."
-        }
-      },
-      {
-        "id": "badger",
-        "animal": "Badger",
-        "title": "The Resilient Debugger",
-        "icon": "🦡",
-        "color": "#697068",
-        "description": "Persistent and grounded. Badgers stay with difficult failures until the evidence points to a real fix.",
-        "signals": {
-          "debugging": 0.66,
-          "problem_solving": 0.2,
-          "testing": 0.14
-        },
-        "strengths": "Stays calm and useful when systems get messy.",
-        "very_compatible": [
-          "owl",
-          "ant"
-        ],
-        "compatible": [
-          "hawk",
-          "raven"
-        ],
-        "score": 27,
+        "score": 62,
         "level": "Junior",
         "avatar": {
           "label": "Explorer",
@@ -608,7 +516,127 @@
           "dolphin",
           "elephant"
         ],
-        "score": 22,
+        "score": 57,
+        "level": "Junior",
+        "avatar": {
+          "label": "Explorer",
+          "mark": "✦",
+          "description": "Building the habit and learning where to look next.",
+          "visual": "A fresh field journal and a small discovery sparkle."
+        }
+      },
+      {
+        "id": "raven",
+        "animal": "Raven",
+        "title": "The Challenger",
+        "icon": "🐦‍⬛",
+        "color": "#454c60",
+        "description": "Independent and discerning. Ravens question defaults, test AI output and surface the overlooked risk.",
+        "signals": {
+          "ai_collaboration": 0.55,
+          "debugging": 0.26,
+          "problem_solving": 0.19
+        },
+        "strengths": "Improves decisions by asking the question others skip.",
+        "very_compatible": [
+          "chameleon",
+          "owl"
+        ],
+        "compatible": [
+          "badger",
+          "fox"
+        ],
+        "score": 54,
+        "level": "Junior",
+        "avatar": {
+          "label": "Explorer",
+          "mark": "✦",
+          "description": "Building the habit and learning where to look next.",
+          "visual": "A fresh field journal and a small discovery sparkle."
+        }
+      },
+      {
+        "id": "owl",
+        "animal": "Owl",
+        "title": "The Investigator",
+        "icon": "🦉",
+        "color": "#4f7a61",
+        "description": "Observant and methodical. Owls gather context, compare signals and resist the first plausible answer.",
+        "signals": {
+          "problem_solving": 0.36,
+          "debugging": 0.38,
+          "ai_collaboration": 0.26
+        },
+        "strengths": "Turns uncertainty into testable hypotheses.",
+        "very_compatible": [
+          "fox",
+          "badger"
+        ],
+        "compatible": [
+          "ant",
+          "raven"
+        ],
+        "score": 43,
+        "level": "Junior",
+        "avatar": {
+          "label": "Explorer",
+          "mark": "✦",
+          "description": "Building the habit and learning where to look next.",
+          "visual": "A fresh field journal and a small discovery sparkle."
+        }
+      },
+      {
+        "id": "ant",
+        "animal": "Ant",
+        "title": "The Validator",
+        "icon": "🐜",
+        "color": "#b17b48",
+        "description": "Careful and dependable. Ants notice edge cases, verify assumptions and help make quality repeatable.",
+        "signals": {
+          "testing": 0.62,
+          "implementation": 0.22,
+          "debugging": 0.16
+        },
+        "strengths": "Makes confidence measurable through validation.",
+        "very_compatible": [
+          "beaver",
+          "elephant"
+        ],
+        "compatible": [
+          "owl",
+          "badger"
+        ],
+        "score": 36,
+        "level": "Junior",
+        "avatar": {
+          "label": "Explorer",
+          "mark": "✦",
+          "description": "Building the habit and learning where to look next.",
+          "visual": "A fresh field journal and a small discovery sparkle."
+        }
+      },
+      {
+        "id": "badger",
+        "animal": "Badger",
+        "title": "The Resilient Debugger",
+        "icon": "🦡",
+        "color": "#697068",
+        "description": "Persistent and grounded. Badgers stay with difficult failures until the evidence points to a real fix.",
+        "signals": {
+          "debugging": 0.66,
+          "problem_solving": 0.2,
+          "testing": 0.14
+        },
+        "strengths": "Stays calm and useful when systems get messy.",
+        "very_compatible": [
+          "owl",
+          "ant"
+        ],
+        "compatible": [
+          "hawk",
+          "raven"
+        ],
+        "score": 18,
         "level": "Junior",
         "avatar": {
           "label": "Explorer",
@@ -623,8 +651,41 @@
     "used_directly": 50,
     "modified": 49,
     "rejected": 1,
-    "edits_analysed": 1072
+    "edits_analysed": 1148
   },
+  "measurement_check": [
+    {
+      "construct": "Testing signals (related, not identical, behaviours)",
+      "claude_signal": {
+        "label": "Ran a test command during the Claude Code session",
+        "value": 31,
+        "stats": {
+          "estimate": 31,
+          "low": 17,
+          "high": 49,
+          "margin": 16,
+          "n": 29
+        },
+        "n": 29,
+        "source": "Claude Code session history"
+      },
+      "git_signal": {
+        "label": "Merged pull request touched a test file",
+        "value": 27,
+        "stats": {
+          "estimate": 27,
+          "low": 15,
+          "high": 43,
+          "margin": 14,
+          "n": 37
+        },
+        "n": 37,
+        "source": "GitHub pull requests"
+      },
+      "delta": 4,
+      "note": "These two signals differ by 4 percentage points. They measure related but different actions — running a test command versus changing a test file — so some gap is expected even if both are accurate. A gap this size could reflect that difference, or that one signal is missing real activity it can't see (tests run outside the observed channel, or test files touched without a local test run). Neither number should be read as a precise measure of \"testing practice\" on its own."
+    }
+  ],
   "sources": [
     "Claude Code",
     "GitHub"

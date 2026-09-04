@@ -17,6 +17,19 @@ function optionAll(name) {
   return values;
 }
 
+// Evidence here is meant to be about you, not whichever PRs happen to be most
+// recent in a repo. So the default is your own authored PRs — auto-detected from
+// the gh CLI's own logged-in session — and a whole-repo listing only happens if
+// --all-contributors is passed explicitly, so that scope change is always a choice
+// visible in the command, not a silent default.
+async function currentGitHubLogin() {
+  try {
+    return (await runGh(["api", "user", "--jq", ".login"])).trim() || null;
+  } catch {
+    return null;
+  }
+}
+
 function runGh(args) {
   return new Promise((resolvePromise, reject) => {
     const child = spawn("gh", args, { stdio: ["ignore", "pipe", "pipe"] });
@@ -49,9 +62,18 @@ const PR_DETAIL_FIELDS = "number,mergedAt,reviewDecision,statusCheckRollup,files
 try {
   const limit = option("--limit", "100");
   const repo = option("--repo");
-  const author = option("--author");
+  const allContributors = process.argv.includes("--all-contributors");
+  let author = option("--author");
   const owners = optionAll("--owner");
   const outputPath = option("--output", "data/git-history-summary.json");
+
+  if (!author && !allContributors) {
+    author = await currentGitHubLogin();
+    if (!author) {
+      throw new Error("Could not detect your GitHub login from the gh CLI (run `gh auth login` first). Pass --author <your-username> explicitly, or --all-contributors to deliberately import every contributor's merged PRs instead of just yours.");
+    }
+    process.stderr.write(`No --author given — defaulting to your own authenticated GitHub user: ${author}. Pass --all-contributors to import every contributor's merged PRs instead.\n`);
+  }
 
   let pulls;
   if (author) {
@@ -64,6 +86,7 @@ try {
     pulls = await mapWithConcurrency(matches, 5, match =>
       runGh(["pr", "view", String(match.number), "--repo", match.repository.nameWithOwner, "--json", PR_DETAIL_FIELDS]).then(JSON.parse));
   } else {
+    process.stderr.write("--all-contributors set — importing merged PRs from every contributor to this repo, not just you.\n");
     const args = ["pr", "list", "--state", "merged", "--limit", limit, "--json", PR_DETAIL_FIELDS];
     if (repo) args.push("--repo", repo);
     pulls = JSON.parse(await runGh(args));

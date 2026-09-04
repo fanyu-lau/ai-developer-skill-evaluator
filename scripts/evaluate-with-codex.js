@@ -3,6 +3,7 @@ import { spawn } from "node:child_process";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { buildClaudeEvaluationPrompt, parseClaudeEvaluation } from "../src/claude-evaluator.js";
+import { checkGuidelineCompliance } from "../src/coaching-guidelines.js";
 
 function option(name, fallback = null) {
   const index = process.argv.indexOf(name);
@@ -38,14 +39,19 @@ try {
   const modelOutputPath = join(workDirectory, "evaluation.json");
   await runCodex(buildClaudeEvaluationPrompt({ history, evidence }), modelOutputPath);
   const evaluation = parseClaudeEvaluation(await readFile(modelOutputPath, "utf8"));
+  const guidelineCheck = checkGuidelineCompliance(evaluation);
   const report = {
     schema_version: "1",
     generated_at: new Date().toISOString(),
     generated_by: "codex_cli",
     analysis_scope: "Derived activity metrics and minimised, verified evidence only. No raw transcript, prompt, source code, shell command or path is sent.",
+    guideline_check: guidelineCheck,
     ...evaluation
   };
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
+  if (!guidelineCheck.passed) {
+    process.stderr.write(`Warning: the generated report may violate its own guidelines — see guideline_check in ${outputPath}: ${JSON.stringify(guidelineCheck.violations)}\n`);
+  }
   console.log(`Created Codex improvement report at ${outputPath}.`);
 } catch (error) {
   process.stderr.write(`${error.message}\n`);

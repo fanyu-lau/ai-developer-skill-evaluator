@@ -28,7 +28,7 @@ If you've imported your Claude Code history (`npm run import:claude-history`), `
 If you've also imported GitHub pull request history (`npm run import:git-history`), two more things happen:
 
 - the PR delivery indicators (review approval rate, CI pass rate, test-file-change rate) become `corroborated` evidence for architecture, implementation, and testing;
-- any Claude session whose activity falls within a 72-hour window of a commit that belongs to an **approved and CI-passed** merged PR is re-graded separately and promoted to `verified` evidence. This is the one link from raw activity to a confirmed outcome the pipeline can make automatically — it's a time correlation, not proof that the specific session produced that specific PR, so it stays capped at `verified`'s weight rather than treated as certain.
+- any Claude session whose activity falls within a 96-hour (4-day) window of a commit that belongs to an **approved and CI-passed** merged PR is re-graded separately and promoted to `verified` evidence. This is the one link from raw activity to a confirmed outcome the pipeline can make automatically — it's a time correlation, not proof that the specific session produced that specific PR, so it stays capped at `verified`'s weight rather than treated as certain. The window is a hand-picked heuristic (a rough stand-in for a typical review-to-merge turnaround), not a validated figure — override it with `--correlation-window-hours <n>` on `npm run evaluate` if you want to test a different value.
 
 Sessions that don't correlate to any verified PR stay at the lower `observed` weight.
 
@@ -87,29 +87,35 @@ make all
 
 ## Typical personal workflow
 
-Use this order for a private assessment of your existing Claude Code and GitHub history. Steps 1 and 2 are each optional, but at least one is required before `npm run evaluate` has anything to score:
+Use this order for a private assessment of your existing Claude Code and GitHub history. Steps 1 and 2 are each optional, but at least one is required before `npm run evaluate` has anything to score. Steps 4–6 are optional coaching add-ons — each sends data externally and needs its own explicit flag, so run them only when you actually want that report.
 
 ```bash
 # 1. Create a local, derived summary of selected Claude Code history.
 npm run import:claude-history -- --input-dir ~/.claude/projects
 
-# 2. Optional: create a derived summary of merged pull requests for the repo you're in.
+# 2. Optional: create a derived summary of your merged GitHub pull requests
+#    (auto-scoped to your own authored PRs — see "Importing GitHub pull request history").
 npm run import:git-history
 
-# 3. Generate the evidence profile from your event data.
+# 3. Generate the evidence profile from your event data -> data/profile.json.
 npm run evaluate
 
-# 4. Ask Codex to create a coaching report from derived data only.
-npm run evaluate:codex -- --allow-external-analysis
+# 4. Optional: ask Claude CLI to create a coaching report from derived data only
+#    (data/claude-history-summary.json + data/profile.json, never raw transcripts).
+make evaluate-claude
+
+# 5. Optional: sample your own recently-typed prompts, locally, no network call.
+npm run sample-prompts -- --input-dir ~/.claude/projects
+
+# 6. Optional: send that sample to Claude CLI for prompting-technique feedback.
+#    Unlike every other command here, this one sends your raw prompt text.
+npm run evaluate:prompting -- --allow-prompt-analysis
+
+# 7. Preview the dashboard at http://localhost:4173 (reads data/profile.json over HTTP).
+make serve
 ```
 
-If your Claude CLI is installed and signed in, you can use it instead of Codex in the last step:
-
-```bash
-npm run evaluate:claude -- --allow-external-analysis
-```
-
-The external-analysis confirmation flag is mandatory. It makes the transfer explicit: only the derived history summary and minimised evidence profile are sent to the selected CLI. Raw transcripts are never passed to either coaching command.
+`make evaluate-claude` is a thin wrapper around `npm run evaluate:claude -- --allow-external-analysis` (see [Coaching reports](#coaching-reports)); use `make evaluate-codex` instead if you have Codex CLI rather than Claude CLI. Every coaching/prompting command's confirmation flag is mandatory by design — it makes what leaves your machine explicit, on a per-command basis, rather than bundling it into `npm run evaluate` or `make all`.
 
 ## Commands
 
@@ -126,7 +132,7 @@ The external-analysis confirmation flag is mandatory. It makes the transfer expl
 | Command | Flags (`--flag <default>`) | What it does | Output |
 | --- | --- | --- | --- |
 | `npm run import:claude-history -- --input-dir <dir>` | `--input-dir` (required), `--output data/claude-history-summary.json` | Reads Claude Code JSONL history locally and writes a derived activity summary. `--input-dir` is typically `~/.claude/projects`. | `data/claude-history-summary.json` |
-| `npm run import:git-history` | `--repo <current repo>`, `--limit 100`, `--output data/git-history-summary.json` | Reads merged pull requests via the `gh` CLI and writes a derived delivery-practice summary. | `data/git-history-summary.json` |
+| `npm run import:git-history` | `--author <your gh login, auto-detected>`, `--all-contributors`, `--repo <current repo>`, `--owner <owner>` (repeatable), `--limit 100`, `--output data/git-history-summary.json` | Reads merged pull requests via the `gh` CLI and writes a derived delivery-practice summary. Defaults to **your own authored PRs only** — it auto-detects your GitHub login from the `gh` CLI's logged-in session, across every repo you can see. Pass `--all-contributors` to explicitly opt into a whole-repo listing (every contributor's merged PRs, not just yours) instead. | `data/git-history-summary.json` |
 
 ### Coaching reports
 
@@ -268,11 +274,16 @@ When the dashboard is served locally, it displays this derived summary in a dedi
 
 ## Importing GitHub pull request history
 
-The git importer uses the [GitHub CLI](https://cli.github.com/) to read merged pull requests for the repository in your current directory (or `--repo owner/name`). It never clones, diffs, or reads file contents — only metadata from `gh pr list`.
+The git importer uses the [GitHub CLI](https://cli.github.com/) to read merged pull requests. It never clones, diffs, or reads file contents — only metadata from `gh pr list` / `gh search prs`.
+
+**By default it only imports pull requests you personally authored** — it auto-detects your GitHub login from the `gh` CLI's own logged-in session (`gh auth status`) and searches across every repo you can see, not just the one you're standing in. This matters: without this, a plain `gh pr list` in a repo returns every contributor's merged PRs, which would silently describe your whole team's delivery practice instead of yours.
 
 ```bash
 npm run import:git-history
-# or: npm run import:git-history -- --repo owner/name --limit 50
+# or, to check someone else's or scope to specific repos:
+npm run import:git-history -- --author octocat --owner your-org --limit 50
+# to deliberately import every contributor's PRs in one repo instead of just yours:
+npm run import:git-history -- --all-contributors --repo owner/name
 ```
 
 It writes [data/git-history-summary.json](data/git-history-summary.json), which contains only:
@@ -283,7 +294,7 @@ It writes [data/git-history-summary.json](data/git-history-summary.json), which 
 
 It does not persist PR titles, descriptions, branch names, authors, file paths, diffs, or commit messages. The report is named `verified_delivery_practice` — merged, reviewed, CI-checked outcomes are stronger ground truth than self-reported activity, but the indicators are still an aggregate across pull requests, not proof about any one specific change, so `npm run evaluate` scores them as `corroborated` rather than `verified`.
 
-`npm run evaluate` additionally uses `commit_timestamps` from approved, CI-passed PRs to re-grade the subset of Claude sessions that fall within a 72-hour window of one of those commits, promoting just that subset to `verified` evidence (see [What PawSkill measures](#what-pawskill-measures)).
+`npm run evaluate` additionally uses `commit_timestamps` from approved, CI-passed PRs to re-grade the subset of Claude sessions that fall within a 96-hour (4-day) window of one of those commits, promoting just that subset to `verified` evidence (see [What PawSkill measures](#what-pawskill-measures)). Pass `--correlation-window-hours <n>` to use a different window.
 
 ## Coaching reports
 

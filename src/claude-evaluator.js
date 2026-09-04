@@ -1,3 +1,5 @@
+import { buildRulesText } from "./coaching-guidelines.js";
+
 const MAX_ITEMS = 3;
 
 function cleanList(value, field) {
@@ -20,10 +22,7 @@ export function buildClaudeEvaluationPrompt({ history, evidence }) {
   return `You are an evidence-based engineering development coach. Analyse the JSON below.
 
 Rules:
-- Treat historical workflow signals as provisional; never infer code quality, seniority, intent, productivity, employment performance, or business impact.
-- Do not rank, hire, promote, compensate, or label a person.
-- Separate verified evidence from observed activity. Explain uncertainty clearly.
-- Give constructive, specific actions the developer can take in their next 1–2 weeks.
+${buildRulesText()}
 - Return ONLY valid JSON with this exact shape:
 {"summary":"string","strengths":["string"],"opportunities":["string"],"recommended_next_actions":["string"],"caveats":["string"]}
 - "summary" must be at most 600 characters.

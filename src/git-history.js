@@ -1,4 +1,5 @@
 import { createHash, randomBytes } from "node:crypto";
+import { wilsonInterval } from "./stats.js";
 
 const TEST_FILE = /(^|\/)(tests?|__tests__|specs?)(\/|$)|[._-](tests?|specs?)\.[a-z0-9]+$|(^|\/)tests?_[^/]+\.[a-z0-9]+$/i;
 
@@ -14,14 +15,28 @@ function ratio(numerator, denominator) {
   return denominator ? numerator / denominator : 0;
 }
 
-/** Reduces a GitHub check/status rollup to a single pass/fail/unknown conclusion. */
+/**
+ * Reduces a GitHub check/status rollup to a single pass/fail/unknown conclusion.
+ *
+ * A PR here is already known to be merged, and GitHub's own UI reports checks as
+ * "X of Y passed" rather than an all-or-nothing verdict — a single non-blocking job
+ * (a coverage report, a preview deploy, a flaky test) can fail without blocking the
+ * merge if it isn't a required check. Treating any one failure as sinking the whole
+ * PR's CI conclusion overstates how often CI "failed": a real example from this
+ * project's own use showed a merged, approved PR with 4 of 5 checks passing —
+ * one failing coverage job — that this function used to mark as a flat "FAILURE".
+ * So the rule is majority-based instead: FAILURE only when more relevant checks
+ * failed than succeeded. This is still a heuristic (not a check for which specific
+ * checks are "required" in branch protection, which would need extra API calls and
+ * permissions this project doesn't ask for) — just a less blunt one.
+ */
 function deriveCiConclusion(statusCheckRollup) {
   const relevant = (statusCheckRollup ?? []).filter(check => check.status !== "COMPLETED" || !["SKIPPED", "NEUTRAL", null, undefined].includes(check.conclusion));
   if (relevant.length === 0) return "NONE";
-  const failed = relevant.some(check => ["FAILURE", "CANCELLED", "TIMED_OUT", "ACTION_REQUIRED", "STARTUP_FAILURE"].includes(check.conclusion) || check.state === "FAILURE");
-  if (failed) return "FAILURE";
-  const succeeded = relevant.some(check => check.conclusion === "SUCCESS" || check.state === "SUCCESS");
-  return succeeded ? "SUCCESS" : "NONE";
+  const failed = relevant.filter(check => ["FAILURE", "CANCELLED", "TIMED_OUT", "ACTION_REQUIRED", "STARTUP_FAILURE"].includes(check.conclusion) || check.state === "FAILURE").length;
+  const succeeded = relevant.filter(check => check.conclusion === "SUCCESS" || check.state === "SUCCESS").length;
+  if (failed === 0) return succeeded ? "SUCCESS" : "NONE";
+  return failed > succeeded ? "FAILURE" : "SUCCESS";
 }
 
 /**
@@ -52,16 +67,23 @@ export function gradePullRequestPractice(pulls) {
     ci_pass_rate: clamp(ratio(ciPassed.length, pulls.length) * 100),
     test_coverage_rate: clamp(ratio(testsChanged.length, pulls.length) * 100)
   };
-  const confidence = clamp(Math.min(pulls.length / 8, 1) * 100);
+  // Wilson interval per indicator against the analysed-PR count, replacing a single
+  // pulls/8 sample-size ramp that was the same number regardless of which indicator.
+  const indicator_stats = {
+    review_approval_rate: wilsonInterval(approved.length, pulls.length),
+    ci_pass_rate: wilsonInterval(ciPassed.length, pulls.length),
+    test_coverage_rate: wilsonInterval(testsChanged.length, pulls.length)
+  };
 
   return {
     assessment_type: "verified_delivery_practice",
     pull_requests_analysed: pulls.length,
-    confidence,
     indicators,
+    indicator_stats,
     interpretation: [
       "This measures merged pull request outcomes (review approval, CI status, test file changes), not code quality or business impact.",
-      "It reflects delivery practice, not individual competency, and must not be used for hiring, promotion, compensation, or ranking people."
+      "It reflects delivery practice, not individual competency, and must not be used for hiring, promotion, compensation, or ranking people.",
+      "Each indicator carries a 95% Wilson interval (indicator_stats) based on the number of pull requests analysed — with few PRs, that interval is wide."
     ]
   };
 }

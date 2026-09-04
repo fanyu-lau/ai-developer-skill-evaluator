@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { spawn } from "node:child_process";
 import { buildClaudeEvaluationPrompt, parseClaudeEvaluation } from "../src/claude-evaluator.js";
+import { checkGuidelineCompliance } from "../src/coaching-guidelines.js";
 
 function option(name, fallback = null) {
   const index = process.argv.indexOf(name);
@@ -34,14 +35,19 @@ try {
   ]);
   const cliResult = JSON.parse(await runClaude(buildClaudeEvaluationPrompt({ history, evidence })));
   const evaluation = parseClaudeEvaluation(cliResult.result);
+  const guidelineCheck = checkGuidelineCompliance(evaluation);
   const report = {
     schema_version: "1",
     generated_at: new Date().toISOString(),
     generated_by: "claude_cli",
     analysis_scope: "Derived activity metrics and minimised, verified evidence only. No raw transcript, prompt, source code, shell command or path is sent.",
+    guideline_check: guidelineCheck,
     ...evaluation
   };
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
+  if (!guidelineCheck.passed) {
+    process.stderr.write(`Warning: the generated report may violate its own guidelines — see guideline_check in ${outputPath}: ${JSON.stringify(guidelineCheck.violations)}\n`);
+  }
   console.log(`Created Claude improvement report at ${outputPath}.`);
 } catch (error) {
   process.stderr.write(`${error.message}\n`);

@@ -24,9 +24,29 @@ test("PR summary keeps only derived fields, no title/body/author/paths", () => {
   assert.equal(JSON.stringify(summary).match(/secret|widget\.js/), null);
 });
 
-test("a failed check overrides a passing one", () => {
+test("a single failing check does not override an equal or greater number of passing checks", () => {
   const summary = summarisePullRequest({ ...rawPr, statusCheckRollup: [{ status: "COMPLETED", conclusion: "SUCCESS" }, { status: "COMPLETED", conclusion: "FAILURE" }] }, { installationId: "s" });
+  assert.equal(summary.ci_conclusion, "SUCCESS");
+});
+
+test("a majority of failing checks does override the passing ones", () => {
+  const summary = summarisePullRequest({ ...rawPr, statusCheckRollup: [{ status: "COMPLETED", conclusion: "SUCCESS" }, { status: "COMPLETED", conclusion: "FAILURE" }, { status: "COMPLETED", conclusion: "FAILURE" }] }, { installationId: "s" });
   assert.equal(summary.ci_conclusion, "FAILURE");
+});
+
+test("regression: a merged PR with 4 of 5 checks passing (one failing coverage job) reads as SUCCESS, not FAILURE", () => {
+  // This is the exact real-world shape that motivated the fix: GitHub's own UI
+  // reported "4 of 5 checks passed" and merged the PR, but the old any-failure-wins
+  // rule collapsed it to a flat "FAILURE".
+  const rollup = [
+    { status: "COMPLETED", conclusion: "SUCCESS" },
+    { status: "COMPLETED", conclusion: "SUCCESS" },
+    { status: "COMPLETED", conclusion: "SUCCESS" },
+    { status: "COMPLETED", conclusion: "SUCCESS" },
+    { status: "COMPLETED", conclusion: "FAILURE" }
+  ];
+  const summary = summarisePullRequest({ ...rawPr, statusCheckRollup: rollup }, { installationId: "s" });
+  assert.equal(summary.ci_conclusion, "SUCCESS");
 });
 
 test("no relevant checks yields NONE, not SUCCESS", () => {
